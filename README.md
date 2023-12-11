@@ -80,15 +80,66 @@ router can assist congestion by telling what rate end hosts should use
 - find a path to dst -> find a least cost path
     - Dijkstra's
 
+### link-state routing 
+- every router knows its local link state
+- every router floods its local link state to all other router in the network
+- every router learns the entire network graph
+- protocol: OSPF messages directly over IP
+
+### distance vector 
+- bellman ford equation
+<img src="bf_eq.jpg" title="bellman ford equation" alt="" width="650" height="200"/>
+from time to time, each node sends its own distance vector stimate to neighbors
+    - problem:
+        - routing loops, count to inifinity
+    - solution
+        - poisoned reverse, advertises cost to inf
+        - not guaranteed
+
+
+
+
 ## 21 wireless
-### Compared to wired link:
-- wireless link decreases signal strength
+### wireless link (between 2 devices):
+- decreases signal strength
 - multipath propagation
     - signals bounce off surface and interfere with one another
 - interference from other sources, idk like microwave?
-### hidden terminal problem
+
+### wireless network (multiple interconnected devices)
+- anybody in proximity can hear and interfere
+- hidden terminal problem
     - occurs when a node can communicate with a wireless access point (AP), but cannot directly communicate with other nodes that are communicating with that AP
 
+### 802.11 wireless LAN (WiFi)
+- use CSMA/CA for multiple access
+- all have infrastructure and ad-hoc modes
+    - infrastructure mode: base stations(access points) connect mobiles to wired network
+    - ad-hoc mode: wireless hosts organize themselves to communicate
+
+- AP broadcast beacon messages and mac addr periodically
+- Hosts scan all the channels to discover the AP
+    - passive scanning
+    - active scanning
+
+- 802.11 multiple access
+    - CSMA: sense before transmitting
+    - CSMA/CA
+        - before data transmission, senders sends a request to send (RTS) with the length of the transmission and the destination
+        - receiver responds with a clear to send (CTS)
+        - sender sends data
+        - receiver sends an ACK
+        - if sender doesnt get a CTS back, it assumes collision
+    - RTS/CTS
+        - reserve the channel
+        - required to avoid hidden terminals
+        - causes exposed node problem 
+            - exposed node problem occurs when a node is prevented from sending packets to other nodes because of co-channel interference with a neighboring transmitter.
+
+## 22 Datacenter networking
+Requirements
+- high bisection bandwidth
+    - Fat tree, fatter link on top 
 
 
     
